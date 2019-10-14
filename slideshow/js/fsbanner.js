@@ -55,7 +55,7 @@ var fsBanner = function(container,options) {
 
 			if (self.options.showName) {
 				var $name = $item.find('.name');
-				if ($name.hasClass('minimized')) $name.hide().removeClass('minimized').fadeIn('fast');
+				//if ($name.hasClass('minimized')) $name.hide().removeClass('minimized').fadeIn('fast');
 			}
 		});
 		this.ilast = null;
