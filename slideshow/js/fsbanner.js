@@ -21,10 +21,15 @@ var fsBanner = function(container,options) {
 		if (!this.container.width()) this.container.width(this.container.parent().width());
 
 		this.part = this.container.width() / this.items.length;
-		this.mini = this.part/4;
-		this.widmain = this.container.width() - (this.mini*this.items.length-1);
-
-		this.items.css({'height':this.container.height(),'width':this.widmain+this.mini});	
+		//console.log('container:'+this.container.width());
+		//console.log('part:'+this.part);
+		//this.mini = this.part/4;
+		this.widmain = this.container.width()/2; //
+		this.mini = (this.container.width()-this.widmain)/(this.items.length-1);
+		//console.log('mini:'+this.mini);
+		//this.widmain = this.container.width() - (this.mini*this.items.length-1);
+		//console.log('widmain:'+this.widmain);
+		this.items.css({'height':this.container.height(),'width':this.widmain});	
 
 		if (!this.options.showName) this.items.find('.name').hide();
 
@@ -68,10 +73,15 @@ var fsBanner = function(container,options) {
 			this.$expanded = $expanded;			
 			this.items.each(function(i) {
 				var $item = $(this);
+				//console.log('iexpanded:'+iexpanded);
 				if (i <= iexpanded) {
+					//console.log('leftif'+i+':'+self.mini);
+					//console.log('leftif'+i+':'+i*self.mini);
 					$item.stop().animate({'left':i*self.mini});
 				} else {
-					$item.stop().animate({'left':i*self.mini+self.widmain});
+					//console.log('leftelse'+i+':'+(self.mini));
+					//console.log('leftelse'+i+':'+(i*self.mini+self.widmain));
+					$item.stop().animate({'left':(i-1)*self.mini+self.widmain});
 				}
 				if (self.options.showName) {
 					var $name = $item.find('.name');
