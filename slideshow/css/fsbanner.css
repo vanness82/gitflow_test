@@ -1,19 +1,10 @@
-.fsbanner, .fsbanner > div > span { 
-	/* obrigatório */
-	display:none; 
-}
+
 div.fsbanner { 
-	/* obrigatorio */ 
 	position:relative;
 	overflow:hidden;
-	/* opcional */
+	/* todo: */
+	width: 1600px;
 	height:300px;
-	color:white;
-	font-size:20px;
-	font-family:Verdana;
-	font-weight:bold;
-	border-radius:5px;
-   -webkit-text-stroke: 1px black;
 }
 
 
@@ -24,16 +15,29 @@ div.fsbanner {
 	top:0px; 
 	left:0px; 
 }
-.fsbanner > div .name { 
-	display:block;
+.fsbanner > div .shade { 
 	position:absolute; 
-	left:0px; 
+	left:0px;
 }
-.fsbanner > div .name.minimized {
+.fsbanner > div .shade.minimized {
+	display:block;
 	position: absolute;
 	bottom: 0;
 	left: 0;
 	width: 100%;
 	background:rgba(27,29,36,0.75);
 	height: 100%;
+}
+
+.fsbanner > div .title {
+	/* todo: */
+	line-height: 300px;  
+    text-align: center;
+}
+
+.fsbanner > div .title > span {
+    padding: 10px 0;
+	border-bottom: 1px solid #fff;
+	color:#fff;
+	font-size:20px;
 }
