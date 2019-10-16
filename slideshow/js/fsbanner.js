@@ -20,15 +20,9 @@ var fsBanner = function(container,options) {
 		this.titles = this.container.find('div.title');
 		if (!this.container.width()) this.container.width(this.container.parent().width());
 
-		this.part = this.container.width() / this.items.length;
-		//console.log('container:'+this.container.width());
-		//console.log('part:'+this.part);
-		//this.mini = this.part/4;
-		this.widmain = this.container.width()/2; //
-		this.mini = (this.container.width()-this.widmain)/(this.items.length-1);
-		console.log('mini:'+this.mini);
-		//this.widmain = this.container.width() - (this.mini*this.items.length-1);
-		console.log('widmain:'+this.widmain);
+		this.part = this.container.width() / this.items.length; //初始单元格宽度
+		this.widmain = this.container.width()/2;  //单元格最大宽度
+		this.mini = (this.container.width()-this.widmain)/(this.items.length-1); //单元格挤压之后的宽度
 		this.items.css({'height':this.container.height(),'width':this.widmain});	
 		if (!this.options.showName) this.items.find('.shade').hide();
 
@@ -89,11 +83,14 @@ var fsBanner = function(container,options) {
 					}
 					if (method){
 						$shade.hide()[method]('minimized').fadeIn('fast');
-						console.log('if'+i+':'+$shade.hide()[method]('minimized').fadeIn('fast'));
+						//console.log('if'+i+':'+$shade.hide()[method]('minimized').fadeIn('fast'));
 					}
 				}
 				if(i == iexpanded) {
 					$title.hide();
+				}
+				else{
+					$title.show();
 				}
 			});
 			this.ilast = iexpanded;
