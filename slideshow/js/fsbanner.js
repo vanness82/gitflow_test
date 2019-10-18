@@ -16,8 +16,9 @@ var fsBanner = function(container,options) {
 
 	this.setup = function() {
 		this.container = $(container);
-		this.items = this.container.find('div.fsitem');
+		this.items = this.container.find('a.fsitem');
 		this.titles = this.container.find('div.title');
+		this.imgs = this.container.find('img.tran');
 		if (!this.container.width()) this.container.width(this.container.parent().width());
 
 		this.part = this.container.width() / this.items.length; //初始单元格宽度
@@ -44,6 +45,7 @@ var fsBanner = function(container,options) {
 	this.resetcss = function() {
 		this.titles.show();
 		this.titles.stop().animate({'width':(this.part/this.widmain)*100+'%'});
+		this.imgs.hide();
 		this.items.each(function(i) {
 			var $item = $(this);
 			$item.stop().animate({'left':i*self.part});
@@ -69,6 +71,7 @@ var fsBanner = function(container,options) {
 			this.items.each(function(i) {
 				var $item = $(this);
 				var $title = $item.find('.title');
+				var $img = $item.find('.tran');
 				if (i <= iexpanded) {
 					$item.stop().animate({'left':i*self.mini});
 				} else {
@@ -88,9 +91,11 @@ var fsBanner = function(container,options) {
 				}
 				if(i == iexpanded) {
 					$title.hide();
+					$img.fadeIn(1500);
 				}
 				else{
 					$title.show();
+					$img.hide();
 				}
 			});
 			this.ilast = iexpanded;

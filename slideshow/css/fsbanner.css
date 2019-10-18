@@ -3,23 +3,25 @@ div.fsbanner {
 	position:relative;
 	overflow:hidden;
 	/* todo: */
-	width: 1600px;
-	height:320px;
+	width: 100%;
+	height:340px;
 }
-
-
-.fsbanner > div { 
+.fsbanner > a { 
 	position:absolute; 
-	background-size:cover;
 	cursor:pointer;
 	top:0px; 
 	left:0px; 
 }
-.fsbanner > div .shade { 
+.fsbanner > .fsitem{
+	background-size:cover;
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+}
+.fsbanner > a .shade { 
 	position:absolute; 
 	left:0px;
 }
-.fsbanner > div .shade.minimized {
+.fsbanner > a .shade.minimized {
 	display:block;
 	position: absolute;
 	bottom: 0;
@@ -28,16 +30,25 @@ div.fsbanner {
 	background:rgba(27,29,36,0.75);
 	height: 100%;
 }
-
-.fsbanner > div .title {
+.fsbanner > a .title {
 	/* todo: */
-	line-height: 320px;  
+	line-height: 340px;  
     text-align: center;
 }
-
-.fsbanner > div .title > span {
+.fsbanner > a .title > span {
     padding: 10px 0;
 	border-bottom: 1px solid #fff;
 	color:#fff;
 	font-size:20px;
+}
+.fsbanner > a .tran{
+	width: auto;
+    height: 100%;
+}
+
+.fsbanner > a .newinfo{
+	float: right;
+	margin-right:1.2rem;
+	text-align: center;
+	margin-top: -0.35rem; 
 }
