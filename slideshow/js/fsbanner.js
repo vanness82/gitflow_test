@@ -1,6 +1,5 @@
 var fsBanner = function(container,options) {
 	var self = this;
-
 	var defaults = {
 		'showName':true,	
 		'toUpdate':{},
@@ -10,24 +9,24 @@ var fsBanner = function(container,options) {
 		'onChanged':null
 	}
 
-	this.options = $.extend({}, defaults, options);
+	self.options = $.extend({}, defaults, options);
 
-	this.ilast = -1;
+	self.ilast = -1;
 
-	this.setup = function() {
-		this.container = $(container);
-		this.items = this.container.find('a.fsitem');
-		this.titles = this.container.find('div.title');
-		this.imgs = this.container.find('img.tran');
-		if (!this.container.width()) this.container.width(this.container.parent().width());
+	self.setup = function() {
+		self.container = $(container);
+		self.items = self.container.find('a.fsitem');
+		self.titles = self.container.find('div.title');
+		self.imgs = self.container.find('img.tran');
+		if (!self.container.width()) self.container.width(self.container.parent().width());
 
-		this.part = this.container.width() / this.items.length; //初始单元格宽度
-		this.widmain = this.container.width()/2;  //单元格最大宽度
-		this.mini = (this.container.width()-this.widmain)/(this.items.length-1); //单元格挤压之后的宽度
-		this.items.css({'height':this.container.height(),'width':this.widmain});	
-		if (!this.options.showName) this.items.find('.shade').hide();
+		self.part = self.container.width() / self.items.length; //初始单元格宽度
+		self.widmain = self.container.width()/2;  //单元格最大宽度
+		self.mini = (self.container.width()-self.widmain)/(self.items.length-1); //单元格挤压之后的宽度
+		self.items.css({'height':self.container.height(),'width':self.widmain});	
+		if (!self.options.showName) self.items.find('.shade').hide();
 
-		this.items.each(function(i) {
+		self.items.each(function(i) {
 			var $item = $(this);
 			$item.css({'z-index':i});
 			if (self.options.trigger == 'click') $item.on('click',function() { self.selectItem($item,i); });
@@ -35,18 +34,18 @@ var fsBanner = function(container,options) {
 		});
 
 		if (self.options.trigger == 'mouse') {
-			this.container.on('mouseleave',function() { self.resetcss(); });
+			self.container.on('mouseleave',function() { self.resetcss(); });
 		}
 
-		this.resetcss();
-		this.container.show();
+		self.resetcss();
+		container.show();
 	}
 
-	this.resetcss = function() {
-		this.titles.show();
-		this.titles.stop().animate({'width':(this.part/this.widmain)*100+'%'});
-		this.imgs.hide();
-		this.items.each(function(i) {
+	self.resetcss = function() {
+		self.titles.show();
+		self.titles.stop().animate({'width':(self.part/self.widmain)*100+'%'});
+		self.imgs.hide();
+		self.items.each(function(i) {
 			var $item = $(this);
 			$item.stop().animate({'left':i*self.part});
 
@@ -55,20 +54,20 @@ var fsBanner = function(container,options) {
 				$shade.addClass('minimized').fadeIn('fast');
 			}
 		});
-		this.ilast = null;
-		this.updateHtml();
+		self.ilast = null;
+		self.updateHtml();
 	};
 
-	this.selectItem = function($expanded,iexpanded,forceClick) {
-		this.$lastexpanded = this.$expanded;
+	self.selectItem = function($expanded,iexpanded,forceClick) {
+		self.$lastexpanded = self.$expanded;
 
-		if (forceClick) this.ilast = null;
-		if (iexpanded == this.ilast) {
-			this.$expanded = null;			
-			this.resetcss();
+		if (forceClick) self.ilast = null;
+		if (iexpanded == self.ilast) {
+			self.$expanded = null;			
+			self.resetcss();
 		} else {
-			this.$expanded = $expanded;			
-			this.items.each(function(i) {
+			self.$expanded = $expanded;			
+			self.items.each(function(i) {
 				var $item = $(this);
 				var $title = $item.find('.title');
 				var $img = $item.find('.tran');
@@ -98,17 +97,17 @@ var fsBanner = function(container,options) {
 					$img.hide();
 				}
 			});
-			this.ilast = iexpanded;
-			this.updateHtml($expanded);
+			self.ilast = iexpanded;
+			self.updateHtml($expanded);
 		}
-		this.fireChanged();
+		self.fireChanged();
 	};
 
-	this.updateHtml = function($expanded) {
-		this.$expanded = $expanded;
+	self.updateHtml = function($expanded) {
+		self.$expanded = $expanded;
 
 		var $parent = $(self.options.hideParent);
-		$.each(this.options.toUpdate,function(field,selector) {
+		$.each(self.options.toUpdate,function(field,selector) {
 			var $obj = $(selector);
 			var showit = false;
 			var value = '';
@@ -132,13 +131,12 @@ var fsBanner = function(container,options) {
 		});
 	};
 
-	this.fireChanged = function() {
-		if (this.options.onChanged) {
-			this.options.onChanged(this.$expanded,this.$lastexpanded);
+	self.fireChanged = function() {
+		if (self.options.onChanged) {
+			self.options.onChanged(self.$expanded,self.$lastexpanded);
 		}
-	};
-
-	this.setup();
+	}; 
+	self.setup();
 };
 
 $.fn.fsBanner = function(options) {
